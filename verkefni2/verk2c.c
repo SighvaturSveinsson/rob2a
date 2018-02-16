@@ -38,16 +38,22 @@ task main(){
 	reset_encoder();
 	drive(BASEDIST,true);
 	reset_encoder();
+	wait1Msec(500);
 	turn(90, true);
 	reset_encoder();
+	wait1Msec(500);
 	drive(BASEDIST,true);
 	reset_encoder();
+	wait1Msec(500);
 	turn(90, false);
 	reset_encoder();
+	wait1Msec(500);
 	drive(BASEDIST,true);
 	reset_encoder();
+	wait1Msec(500);
 	turn(90, false);
 	reset_encoder();
+	wait1Msec(500);
 	drive(BASEDIST,true);
 
 }
