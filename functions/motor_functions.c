@@ -22,10 +22,34 @@ void drive(int dist,bool bf){
 			motor[right_motor] = 80*dir;		    // Right Motor is run at power level 80
 			motor[left_motor]  = 60*dir;		    // Left Motor is run at power level 60
 		}
+	}
+}
 
+void turn(int dist,bool bf){
+	int encoder_value = abs(SensorValue[right_encoder]) + abs(SensorValue[left_encoder]);
+	while(dist*BASETURN > abs(SensorValue[right_encoder])){
+
+		if(bf)
+		{
+			motor[right_motor] = 60;
+			motor[left_motor]  = -60;
+		}
+		else
+		{
+
+			motor[right_motor] = -60;
+			motor[left_motor]  = 60;
+		}
+	}
 }
-}
+
 void reset_encoder(){
 	SensorValue[right_encoder] = 0;
 	SensorValue[left_encoder] = 0;
+}
+void stop_motors(){
+	motor[right_motor]=0;
+	motor[left_motor]=0;
+	motor[claw_motor]=0;
+	motor[arm_motor]=0;
 }
