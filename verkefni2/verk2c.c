@@ -34,27 +34,31 @@
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main(){
-
 	reset_encoder();
 	drive(BASEDIST,true);
+	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
 	turn(90, true);
+	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
 	drive(BASEDIST,true);
+	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
 	turn(90, false);
+	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
 	drive(BASEDIST,true);
+	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
 	turn(90, false);
+	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
 	drive(BASEDIST,true);
-
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
