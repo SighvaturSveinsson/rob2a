@@ -26,6 +26,13 @@ int power = 127;
 //Timi til a fara 0.5 metra
 const int BASETIME = 1000;
 
+void stop_motors(){
+	motor[right_motor]=0;
+	motor[left_motor]=0;
+	motor[claw_motor]=0;
+	motor[arm_motor]=0;
+}
+
 //bool = True or False
 void drive(int counter,bool bf){
 	//if bf = True
@@ -42,11 +49,15 @@ void drive(int counter,bool bf){
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
-task main()
+task main(){
 
 	for(int i=1;i<5;i++){
+	stop_motors();
+	wait1Msec(500);
 	drive(i,true);
+	stop_motors();
+	wait1Msec(500);
 	drive(i,false);
-}
+	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

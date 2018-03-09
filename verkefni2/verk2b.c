@@ -29,7 +29,9 @@
 |*		//   Ummal_hj = d * Pi                                                                          *|
 |*		//   Ummal_hj = 10.16 * 3.14 = 31.9                                                             *|
 |*		//   Base_dist = 50cm/Umml_hj*360                                                               *|
-|*		//   50/31.9*360 = 564.26*|                                                                     *|
+|*		//   50/31.9*360 = 564.26                                                                       *|
+|*		//   564.26/90 = 6.27                                                                           *|
+|*		//   564.26/4 = 141.07                                                                          *|
 \*-----------------------------------------------------------------------------------------------4246-*/
 int power = 127;
 
@@ -38,8 +40,12 @@ task main(){
 
 	for(int i=1;i<5;i++){
 	reset_encoder();
+	stop_motors();
+	wait1Msec(500);
 	drive(BASEDIST*i,true);
 	reset_encoder();
+	stop_motors();
+	wait1Msec(500);
 	drive(BASEDIST*i,false);
 	}
 }
