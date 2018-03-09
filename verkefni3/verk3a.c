@@ -34,6 +34,9 @@ task main(){
 		if (vexRT[Btn8U] == 1){
 			break;
 		}
+		if (SensorValue[emergency_button] == 1){
+			break;
+		}
 		joy_l = vexRT[Ch4];
     joy_r = vexRT[Ch2];
 		if((abs(joy_r) > threshold))
