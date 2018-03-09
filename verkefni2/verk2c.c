@@ -43,6 +43,7 @@ task main(){
 	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
+	for (int i=1;i<3;i++){
 	drive(BASEDIST,true);
 	stop_motors();
 	reset_encoder();
@@ -51,14 +52,6 @@ task main(){
 	stop_motors();
 	reset_encoder();
 	wait1Msec(500);
-	drive(BASEDIST,true);
-	stop_motors();
-	reset_encoder();
-	wait1Msec(500);
-	turn(90, false);
-	stop_motors();
-	reset_encoder();
-	wait1Msec(500);
-	drive(BASEDIST,true);
+	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
