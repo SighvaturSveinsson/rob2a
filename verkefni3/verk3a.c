@@ -22,39 +22,47 @@
 |*                                         - Verkefni 3 -                                         		*|
 |*                                      ROBOTC on VEX 2.0 CORTEX                                      *|
 |*  This program uses the controller to control your robot with 2 joysticks to move forward and turn, *|
-|*	2 buttons to lift and lower the arm and an emergency button.																			*|
+|*	2 buttons to lift and lower the arm, 2 buttons to open and close the claw and an emergency button.*|
 \*----------------------------------------------------------------------------------------------------*/
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main(){
 	int joy_l;
-  int joy_r;
-  int threshold = 10;
+	int joy_r;
+	int threshold = 10;
+	int motorPow1 = 25;
+	int motorPow2 = 50;
 	while (true){
 		if (vexRT[Btn8U] == 1){
 			break;
 		}
-		if (SensorValue[emergency_button] == 1){
+		if (SensorValue[emergency_button] == 1 or vexRT[Btn8U] == 1 ){
 			break;
 		}
 		joy_l = vexRT[Ch4];
-    joy_r = vexRT[Ch2];
+		joy_r = vexRT[Ch2];
 		if((abs(joy_r) > threshold))
-    {
-      motor[left_motor]  = (joy_r)/2;
-      motor[right_motor] = (joy_r)/2;
-    }
-    if((abs(joy_l) > threshold))
-    {
-      motor[left_motor]  = (joy_l)/2;
-      motor[right_motor] = -(joy_l)/2;
-    }
+		{
+			motor[left_motor]  = (joy_r)/2;
+			motor[right_motor] = (joy_r)/2;
+		}
+		if((abs(joy_l) > threshold))
+		{
+			motor[left_motor]  = (joy_l)/2;
+			motor[right_motor] = -(joy_l)/2;
+		}
 
 		if (vexRT[Btn6D] == 1){
-			motor[arm_motor]=25;
+			motor[arm_motor]=motorPow1;
 		}
 		if (vexRT[Btn6U] == 1){
-			motor[arm_motor]=-50;
+			motor[arm_motor]=-motorPow2;
+		}
+		if (vexRT[Btn5D] == 1){
+			motor[claw_motor]=motorPow1;
+		}
+		if (vexRT[Btn5U] == 1){
+			motor[claw_motor]=-motorPow2;
 		}
 		wait1Msec(100);
 		stop_motors();
