@@ -24,7 +24,7 @@
 |*  This program uses the line sensors to follow a line.                                              *|
 \*----------------------------------------------------------------------------------------------------*/
 
-task emergen_stop(){
+task emergency_stop(){
 	while (SensorValue[emergency_button] == 0){
 
 	}
@@ -32,24 +32,24 @@ task emergen_stop(){
 }
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main(){
-	StartTask(emergen_stop);
-	wait1Msec(8000);          // The program waits for 2000 milliseconds before continuing.
+	StartTask(emergency_stop);
+	wait1Msec(10000);          // The program waits for 2000 milliseconds before continuing.
 
-  int threshold = 505;      /* found by taking a reading on both DARK and LIGHT    */
+  int threshold = 2500;      /* found by taking a reading on both DARK and LIGHT    */
                             /* surfaces, adding them together, then dividing by 2. */
   while(true)
   {
-    if(SensorValue(line_sensor_right) > 2500)
+    if(SensorValue(line_sensor_right) > threshold)
     {
       motor[left_motor]  = 60;
       motor[right_motor] = 0;
     }
-    if(SensorValue(line_sensor_center) > 2500)
+    if(SensorValue(line_sensor_center) > threshold)
     {
       motor[left_motor]  = 60;
       motor[right_motor] = 60;
     }
-    if(SensorValue(line_sensor_left) > 2500)
+    if(SensorValue(line_sensor_left) > threshold)
     {
       motor[left_motor]  = 0;
       motor[right_motor] = 60;
