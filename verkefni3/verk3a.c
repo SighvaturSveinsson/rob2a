@@ -33,10 +33,7 @@ task main(){
 	int motorPow1 = 25;
 	int motorPow2 = 50;
 	while (true){
-		if (vexRT[Btn8U] == 1){
-			break;
-		}
-		if (SensorValue[emergency_button] == 1 or vexRT[Btn8U] == 1 ){
+		if (SensorValue[emergency_button] == 1 || vexRT[Btn8U] == 1){
 			break;
 		}
 		joy_l = vexRT[Ch4];
