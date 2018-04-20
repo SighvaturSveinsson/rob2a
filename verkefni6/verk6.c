@@ -49,39 +49,11 @@ task line_follower(){
       motor[left_motor]  = no_power;
       motor[right_motor] = power;
     }
-    if(SensorValue(line_sensor_center) < 2000)
+    if(SensorValue(line_sensor_center) < 2050)
   	{
-    	motor[left_motor]  = power;
-      motor[right_motor] = -power;
-    }
-  }
-}
-
-task find_line(){
-	while(true)
-  {
-  	if(SensorValue(line_sensor_right) > line_threshold)
-    {
-      motor[left_motor]  = power;
-      motor[right_motor] = no_power;
-      StartTask(line_follower);
-      StopTask(find_line)
-    }
-    if(SensorValue(line_sensor_center) > line_threshold)
-    {
-      motor[left_motor]  = power;
+    	motor[left_motor]  = -power;
       motor[right_motor] = power;
-      StartTask(line_follower);
-      StopTask(find_line)
     }
-    if(SensorValue(line_sensor_left) > line_threshold)
-    {
-      motor[left_motor]  = no_power;
-      motor[right_motor] = power;
-      StartTask(line_follower);
-      StopTask(find_line)
-    }
-
   }
 }
 
@@ -98,12 +70,12 @@ task take_silo(){
 	motor[claw_motor]=40;
 	wait1Msec(1000);
 	stop_wait1sec();
-	while(SensorValue(arm_potentiometer) < 2000){
+	while(SensorValue(arm_potentiometer) < 2200){
 		motor[arm_motor]=-50;
 	}
 	stop_wait1sec();
 	reset_encoder();
-	turn(180, false);
+	turn(180, true);
 	stop_wait1sec();
 }
 
@@ -146,8 +118,7 @@ task main(){
 			}
 		}
 		wait1Msec(5000);
-		stop_motors();
-		wait1Msec(5000);
+		stop_wait1sec();
 		StartTask(line_follower);
 		while(has_silo){
 			if(SensorValue(ultrasonicSonar) < 30 & has_silo){
