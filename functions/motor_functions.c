@@ -49,3 +49,12 @@ void stop_motors(){
 	motor[claw_motor]=0;
 	motor[arm_motor]=0;
 }
+
+void stop_arm(){
+	motor[arm_motor]=0;
+}
+
+void stop_wait1sec(){
+	stop_motors();
+	wait1Msec(1000);
+}
