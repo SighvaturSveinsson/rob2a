@@ -25,24 +25,33 @@
 |*  crashing into objects infront of the robot. 				                                              *|
 \*----------------------------------------------------------------------------------------------------*/
 
+task emergency_stop(){
+	while (SensorValue[emergency_button] == 0 || vexRT[Btn8U] == 1){
+	}
+	StopAllTasks();
+}
+
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
+
 task main(){
+	StartTask(emergency_stop);
 	while (true){
 		while(SensorValue(light_sensor) < 300){
-			if(SensorValue(ultrasonicSonar) > 50){
-				motor[right_motor] = 60;
-				motor[left_motor]  = 60;
+			if(SensorValue(ultrasonicSonar) > 35){
+				reset_encoder();
+				drive(100, true);
+				stop_motors();
 			}
 			else{
 				stop_motors();
 				wait1Msec(500);
-				motor[right_motor] = -60;
-				motor[left_motor] = 60;
-				wait1Msec(1000);
+				reset_encoder();
+				turn(90, true);
 				stop_motors();
 				wait1Msec(500);
 			}
 		}
 	}
 }
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
