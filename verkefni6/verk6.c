@@ -49,10 +49,10 @@ task line_follower(){
       motor[left_motor]  = no_power;
       motor[right_motor] = power;
     }
-    if(SensorValue(line_sensor_center) < 2050)
+    if(SensorValue(line_sensor_center) < 1900)
   	{
-    	motor[left_motor]  = -power;
-      motor[right_motor] = power;
+    	motor[left_motor]  = power;
+      motor[right_motor] = -power;
     }
   }
 }
@@ -70,12 +70,13 @@ task take_silo(){
 	motor[claw_motor]=40;
 	wait1Msec(1000);
 	stop_wait1sec();
-	while(SensorValue(arm_potentiometer) < 2200){
+
+	while(SensorValue(arm_potentiometer) < potent_arm_limit){
 		motor[arm_motor]=-50;
 	}
 	stop_wait1sec();
 	reset_encoder();
-	turn(180, true);
+	turn(180, false);
 	stop_wait1sec();
 }
 
@@ -91,15 +92,6 @@ task drop_silo(){
 	stop_wait1sec();
 }
 
-task light(){
-	while (SensorValue(light_sensor)	> 300){
-		StopTask(line_follower);
-		StopTask(take_silo);
-		StopTask(drop_silo);
-		stop_motors();
-	}
-}
-
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 
 task main(){
@@ -107,7 +99,6 @@ task main(){
 		wait1Msec(5000);
 		StartTask(emergency_stop);
 		StartTask(line_follower);
-		StartTask(light);
 		while(has_silo == false){
 			if(SensorValue(ultrasonicSonar) < 30){
 				StopTask(line_follower);
