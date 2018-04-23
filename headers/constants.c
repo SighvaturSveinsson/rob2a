@@ -1,4 +1,4 @@
-const int potent_arm_limit = 1400;
+const int potent_arm_limit = 2200;
 const int BASEDIST = 564;
 const int power = 65;
 const	int low_power = 45;
