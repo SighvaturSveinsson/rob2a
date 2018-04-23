@@ -25,35 +25,34 @@
 \*----------------------------------------------------------------------------------------------------*/
 
 task emergency_stop(){
-	while (SensorValue[emergency_button] == 0){
-
+	while (SensorValue[emergency_button] == 0 || vexRT[Btn8U] == 1){
 	}
 	StopAllTasks();
 }
-//+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
-task main(){
-	StartTask(emergency_stop);
-	wait1Msec(10000);          // The program waits for 2000 milliseconds before continuing.
 
-  int threshold = 2500;      /* found by taking a reading on both DARK and LIGHT    */
-                            /* surfaces, adding them together, then dividing by 2. */
+//+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
+
+task main(){
+	wait1Msec(10000);
+	StartTask(emergency_stop);
   while(true)
   {
-    if(SensorValue(line_sensor_right) > threshold)
+    if(SensorValue(line_sensor_right) > line_threshold)
     {
-      motor[left_motor]  = 60;
-      motor[right_motor] = 0;
+      motor[left_motor]  = power;
+      motor[right_motor] = no_power;
     }
-    if(SensorValue(line_sensor_center) > threshold)
+    if(SensorValue(line_sensor_center) > line_threshold)
     {
-      motor[left_motor]  = 60;
-      motor[right_motor] = 60;
+      motor[left_motor]  = power;
+      motor[right_motor] = power;
     }
-    if(SensorValue(line_sensor_left) > threshold)
+    if(SensorValue(line_sensor_left) > line_threshold)
     {
-      motor[left_motor]  = 0;
-      motor[right_motor] = 60;
+      motor[left_motor]  = no_power;
+      motor[right_motor] = power;
     }
   }
 }
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
