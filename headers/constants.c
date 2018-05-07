@@ -5,3 +5,5 @@ const	int low_power = 45;
 const	int no_power = 0;
 const int line_threshold = 2500;
 const float BASETURN = 2.38;
+const int controller_threshold = 10;
+const int BASETIME = 1000;
