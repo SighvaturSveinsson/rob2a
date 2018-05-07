@@ -21,7 +21,8 @@
 /*----------------------------------------------------------------------------------------------------*\
 |*                                         - Verkefni 6 -                                         		*|
 |*                                      ROBOTC on VEX 2.0 CORTEX                                      *|
-|*  This program uses the line sensors to follow a line.                                              *|
+|*  This program uses the line sensors to follow a line. Then picks up a silo, turns around, follows  *|
+|*  the line back and drops the silo into a container                                                 *|
 \*----------------------------------------------------------------------------------------------------*/
 bool has_silo = false;
 
