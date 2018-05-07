@@ -1,4 +1,17 @@
 
+void drive_time(int counter,bool bf){
+	if(bf){
+		motor[right_motor] = power;
+		motor[left_motor]  = power;
+		wait1Msec(BASETIME*counter);
+	}
+	else{
+		motor[right_motor] = -power;
+		motor[left_motor]  = -power;
+		wait1Msec(BASETIME*counter);
+	}
+}
+
 void drive(int dist,bool bf){
 	int dir = (bf)? (1): (-1);
 	while(dist > abs(SensorValue[right_encoder])){
